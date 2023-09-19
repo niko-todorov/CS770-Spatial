@@ -8,7 +8,7 @@ plot(elevation, lowess=T)
 
 # 6/59
 library(akima)
-int=interp.new(elevation$coords[,1],elevation$coords[,2],elevation$data)
+int=interp(elevation$coords[,1],elevation$coords[,2],elevation$data)
 image(int,xlim=range(elevation$coords[,1]),ylim=range(elevation$coords[,2]))
 contour(int,add=T)
 
