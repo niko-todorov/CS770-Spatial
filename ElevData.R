@@ -52,7 +52,7 @@ lines.variomodel(seq(0,5,by=0.5),
 # 22/59
 locs=pred_grid(c(0,6.3),c(0,6.3),by=0.1)
 KC=krige.control(type="sk",obj.mod=m10)
-sk=krige.conv(elevation, krige=KC,loc=locs)
+skt=krige.conv(elevation, krige=KC,loc=locs)
 # spatial maps of predictions
 pred.lim=range(c(sk$pred,skt$pred))
 sd.lim=range(c(sk$kr,skt$kr))
@@ -79,7 +79,7 @@ function(geodata, coords = geodata$coords,
     locations = "no", borders, model,prior,output)
   
 # 37/59
-  MC=model.control(trend.d="1st",trend.l="1st",kappa=1.5)
+MC=model.control(trend.d="1st",trend.l="1st",kappa=1.5)
 PC=prior.control(phi.discrete=seq(0,6,l=21),
     phi.prior="reciprocal",
     tausq.rel.prior="unif",tausq.rel.discrete=seq(0,1,l=11))
@@ -123,6 +123,7 @@ plot(sim$coords[,1],sim$coords[,2],type = "n")
 text(sim$coords[,1],sim$coords[,2],format(sim$data))
 
 # 48/59
+library(geoRglm)#!
 model2=krige.glm.control(cov.pars =c(1,1),beta = 1)
 test2.tune=pois.krige(p50,krige=model2,mcmc.input=list(S.scale=0.2,thin = 1))
 
